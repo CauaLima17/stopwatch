@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #535b61;
+    font-family: "Share Tech Mono", monospace;
+}
+
+.chronometer-container {
+    background-color: #3e4144;
+    padding: 20px;
+    border-radius: 4px;
+    width: 800px;
+    color: #fff;
+}
+
+.chronometer-timer {
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+    border-bottom: 1px solid #363a3d;
+}
+
+.chronometer-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 32px;
+}
+
+button {
+    border: none;
+    box-shadow: 4px 4px #363a3d;
+    padding: 12px 20px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 4px;
+    background-color: #65727c;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #474b4e;
+}
+
+h1:not(:last-of-type) {
+    font-size: 6rem;
+}
+
+h1:first-of-type::after{
+    content: ':';
+}

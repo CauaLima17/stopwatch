@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Cronômetro</title>
+</head>
+<body>
+    <div class="chronometer-container">
+        <div class="chronometer-timer">
+            <h1 id="chrono-minutes">00</h1>
+            <h1 id="chrono-seconds">00</h1>
+            <h1 id="chrono-mili-seconds">00</h1>
+        </div>
+        <div class="chronometer-buttons">
+            <button id="init-button" onclick="chronometerInit()">Iniciar</button>
+            <button onclick="chronometerStop()">Pausar</button>
+            <button onclick="chronometerReset()">Reiniciar</button>
+        </div>
+    </div>
+
+    <script>
+        const minutesElement = document.getElementById('chrono-minutes');
+        const secondsElement = document.getElementById('chrono-seconds');
+        const miliSecondsElement = document.getElementById('chrono-mili-seconds');
+        const initButton = document.getElementById('init-button')
+
+
+        let minutes = 0;
+        let seconds = 0;
+        let miliSeconds = 0;
+
+        let intervalId
+        let wasInit
+
+        function numberFormat(num){
+            return num < 10 ? '0' + num : num;
+        };
+
+        function chronometerInit() {
+            initButton.disabled = true
+            initButton.textContent = 'iniciar'
+            intervalId = setInterval(function() {
+
+                miliSeconds += 1;
+                miliSecondsElement.textContent = numberFormat(miliSeconds);
+                
+
+                if (miliSeconds == 60){
+                    seconds += 1;
+                    secondsElement.textContent = numberFormat(seconds);
+                    miliSecondsElement.textContent = '00';
+                    miliSeconds = 0;
+                }
+
+                if (seconds == 60){
+                    minutes += 1;
+                    minutesElement.textContent = numberFormat(minutes);
+                    secondsElement.textContent = '00';
+                    seconds = 0;
+                }
+            }, 15);   
+        };
+
+        function chronometerReset() {
+            clearInterval(intervalId);
+            initButton.textContent = 'iniciar'
+            initButton.disabled = false
+
+            minutes = 0;
+            seconds = 0;
+            miliSeconds = 0;
+
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+            miliSecondsElement.textContent = '00';
+        };
+
+        function chronometerStop(){
+            clearInterval(intervalId);
+            initButton.disabled = false
+
+            initButton.textContent = 'Continuar'
+            minutesElement.textContent = numberFormat(minutes);
+            secondsElement.textContent = numberFormat(seconds);
+            miliSecondsElement.textContent = numberFormat(miliSeconds);
+        }
+
+    </script>
+</body>
+</html>
